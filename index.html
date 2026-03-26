@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virtual Ontario Student Services | Academic Support & Tutoring</title>
+  <meta name="description" content="Professional academic support services for Ontario students. Tutoring, reference materials, and assignment guidance.">
+  <style>
+    :root {
+      --primary: #1a3a5c;
+      --accent: #2e86de;
+      --accent-light: #54a0ff;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --border: #e2e8f0;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --radius: 12px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--primary);
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      color: #fff;
+      font-size: 1.25rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo span { color: var(--accent-light); }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      background: var(--accent);
+      color: #fff !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600 !important;
+    }
+    .nav-cta:hover { background: var(--accent-light); }
+
+    .hamburger { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #0c2340 100%);
+      color: #fff;
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+    }
+    .hero h1 { font-size: 2.75rem; margin-bottom: 1rem; line-height: 1.2; }
+    .hero h1 span { color: var(--accent-light); }
+    .hero p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto 2rem; }
+    .hero-cta {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 1rem 2.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(46,134,222,0.4); }
+
+    .trust-bar {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+
+    /* SECTIONS */
+    section { padding: 4rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--text-light);
+      margin-bottom: 3rem;
+      font-size: 1.05rem;
+    }
+
+    /* HOW IT WORKS */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+    .step {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+    .step-num {
+      width: 48px; height: 48px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0 auto 1rem;
+    }
+    .step h3 { margin-bottom: 0.5rem; font-size: 1.1rem; }
+    .step p { color: var(--text-light); font-size: 0.95rem; }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: box-shadow 0.2s;
+    }
+    .service-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+    .service-card h3 { margin-bottom: 0.5rem; color: var(--primary); }
+    .service-card p { color: var(--text-light); font-size: 0.95rem; margin-bottom: 1rem; }
+    .price { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+    .price-note { font-size: 0.85rem; color: var(--text-light); }
+
+    /* PRICING TABLE */
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .pricing-table th {
+      background: var(--primary);
+      color: #fff;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+    .pricing-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .pricing-table tr:last-child td { border-bottom: none; }
+    .pricing-table tr:nth-child(even) { background: #f1f5f9; }
+
+    /* FAQ */
+    .faq-list { max-width: 700px; margin: 0 auto; }
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+    .faq-q {
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    .faq-q:hover { background: #f8fafc; }
+    .faq-q::after { content: '+'; font-size: 1.5rem; color: var(--accent); transition: transform 0.2s; }
+    .faq-item.open .faq-q::after { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s;
+      padding: 0 1.5rem;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-a { max-height: 400px; padding: 0 1.5rem 1.25rem; }
+
+    /* ORDER FORM SECTION */
+    .order-section { background: #eef3f9; }
+    .order-info {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .order-info p { color: var(--text-light); margin-bottom: 1.5rem; font-size: 1.05rem; }
+    .order-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 1rem 3rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 1.15rem;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .order-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(46,134,222,0.3); }
+    .order-note {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    /* TERMS */
+    .terms-section { background: var(--card); }
+    .terms-content {
+      max-width: 800px;
+      margin: 0 auto;
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .terms-content h3 {
+      color: var(--primary);
+      margin: 1.5rem 0 0.5rem;
+      font-size: 1.1rem;
+    }
+    .terms-content h3:first-child { margin-top: 0; }
+
+    /* FOOTER */
+    footer {
+      background: var(--primary);
+      color: rgba(255,255,255,0.75);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    footer a { color: var(--accent-light); text-decoration: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--primary); padding: 1rem 2rem; gap: 1rem; }
+      .nav-links.open { display: flex; }
+      .hamburger { display: block; }
+      .trust-bar { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">VOSS <span>| Virtual Ontario Student Services</span></a>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#order" class="nav-cta">Place Order</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Academic Support,<br><span>Done Right.</span></h1>
+  <p>Ontario's trusted academic assistance service. Expert tutoring, reference materials, and assignment guidance tailored to your course requirements.</p>
+  <a href="#order" class="hero-cta">Get Started &mdash; Free Quote</a>
+  <div class="trust-bar">
+    <div class="trust-item">&#128274; Confidential &amp; Secure</div>
+    <div class="trust-item">&#9889; Fast Turnaround</div>
+    <div class="trust-item">&#127891; Ontario Curriculum Experts</div>
+    <div class="trust-item">&#128176; Affordable Pricing</div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-sub">Simple, fast, and stress-free. Four steps to academic support.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Submit Your Request</h3>
+        <p>Fill out our order form with your assignment details, rubric, and any supporting files. You can upload PDFs or paste instructions directly.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Get a Free Quote</h3>
+        <p>We'll review your request and email you a quote within 1&ndash;2 hours. No obligation &mdash; only proceed if the price works for you.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Confirm &amp; Pay</h3>
+        <p>Accept the quote and pay via Interac e-Transfer. Work begins immediately upon payment confirmation.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Receive Your Work</h3>
+        <p>Completed reference materials are delivered to your email before your deadline. One free revision included within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="background: #eef3f9;">
+  <div class="container">
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-sub">Comprehensive academic support across all subjects and assignment types.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3>Essays &amp; Written Assignments</h3>
+        <p>Research papers, essays, reports, case studies, literature reviews, and reflections. APA, MLA, and Chicago formatting available.</p>
+        <div class="price">From $15<span class="price-note"> / page</span></div>
+      </div>
+      <div class="service-card">
+        <h3>Math &amp; Science Problems</h3>
+        <p>Calculus, statistics, physics, chemistry, and more. Step-by-step solutions with detailed explanations and work shown.</p>
+        <div class="price">From $5<span class="price-note"> / problem</span></div>
+      </div>
+      <div class="service-card">
+        <h3>Presentations &amp; Projects</h3>
+        <p>PowerPoint decks, group project contributions, poster presentations, and multimedia assignments.</p>
+        <div class="price">From $25<span class="price-note"> / project</span></div>
+      </div>
+      <div class="service-card">
+        <h3>Lab Reports &amp; Technical Work</h3>
+        <p>Biology, chemistry, engineering, and computer science lab reports with proper methodology and analysis sections.</p>
+        <div class="price">From $20<span class="price-note"> / report</span></div>
+      </div>
+      <div class="service-card">
+        <h3>Discussion Posts &amp; Short Answers</h3>
+        <p>Online course discussion boards, forum responses, and short-answer quizzes with proper citations.</p>
+        <div class="price">From $10<span class="price-note"> / post</span></div>
+      </div>
+      <div class="service-card">
+        <h3>Editing &amp; Proofreading</h3>
+        <p>Grammar, structure, citation formatting, and clarity improvements on your existing work.</p>
+        <div class="price">From $5<span class="price-note"> / page</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <h2 class="section-title">Pricing</h2>
+    <p class="section-sub">Transparent pricing. No hidden fees. Free quotes before you commit.</p>
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Standard (3+ days)</th>
+          <th>Rush (24&ndash;48 hrs)</th>
+          <th>Urgent (&lt;24 hrs)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Essays / Written Work</strong></td>
+          <td>$15 / page</td>
+          <td>$22 / page</td>
+          <td>$30 / page</td>
+        </tr>
+        <tr>
+          <td><strong>Math / Science Problems</strong></td>
+          <td>$5 / problem</td>
+          <td>$8 / problem</td>
+          <td>$12 / problem</td>
+        </tr>
+        <tr>
+          <td><strong>Presentations</strong></td>
+          <td>$25+ / project</td>
+          <td>$40+ / project</td>
+          <td>$55+ / project</td>
+        </tr>
+        <tr>
+          <td><strong>Lab Reports</strong></td>
+          <td>$20+ / report</td>
+          <td>$30+ / report</td>
+          <td>$45+ / report</td>
+        </tr>
+        <tr>
+          <td><strong>Discussion Posts</strong></td>
+          <td>$10 / post</td>
+          <td>$15 / post</td>
+          <td>$20 / post</td>
+        </tr>
+        <tr>
+          <td><strong>Editing / Proofreading</strong></td>
+          <td>$5 / page</td>
+          <td>$8 / page</td>
+          <td>$12 / page</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="text-align:center; margin-top:1rem; color:var(--text-light); font-size:0.9rem;">
+      Prices are starting rates. Complexity, length, and academic level may affect the final quote.<br>
+      Graduate-level and technical work may be priced higher. <strong>You always receive a quote before paying.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ORDER -->
+<section id="order" class="order-section">
+  <div class="container">
+    <h2 class="section-title">Place Your Order</h2>
+    <div class="order-info">
+      <p>Click below to open our secure order form. Upload your rubric, paste your instructions, and tell us what you need. We'll send you a free quote within 1&ndash;2 hours.</p>
+      <!-- IMPORTANT: Replace this URL with your actual Tally.so form link -->
+      <a href="https://tally.so/r/GxLojp" target="_blank" class="order-btn">Open Order Form &rarr;</a>
+      <p class="order-note">Powered by Tally.so &bull; Secure &bull; Files accepted: PDF, DOCX, PPTX, images, and more</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <p class="section-sub">Everything you need to know before placing an order.</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What exactly do you provide?</div>
+        <div class="faq-a">We provide academic reference materials, tutoring support, and model answers designed to help you understand course material and guide your own work. Our materials serve as study aids and examples.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Do you guarantee a specific grade?</div>
+        <div class="faq-a">No. While we strive for high-quality work that meets the rubric requirements you provide, we cannot guarantee any specific grade outcome. Grading is at the sole discretion of your instructor, and many factors outside our control (such as class participation, previous submissions, and instructor expectations) can influence your grade.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What if the instructions I provided were wrong or incomplete?</div>
+        <div class="faq-a">It is your responsibility to provide accurate, complete instructions and rubric details. We complete work based on what you submit. If the rubric or instructions you provided were incorrect or incomplete, we are not responsible for the resulting work not meeting your expectations. Always double-check your submission before sending.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I pay?</div>
+        <div class="faq-a">We accept Interac e-Transfer (Canada) as our primary payment method. Payment instructions are included in your quote. Work begins once payment is confirmed.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What is your refund policy?</div>
+        <div class="faq-a">If the delivered work does not match the instructions you provided, we offer one free revision within 24 hours of delivery. Partial refunds may be considered on a case-by-case basis for quality issues. We do not offer refunds based on grade outcomes, late personal submissions, or incorrect instructions provided by the customer.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How fast can you deliver?</div>
+        <div class="faq-a">Standard turnaround is 3+ business days. Rush delivery (24&ndash;48 hours) and urgent delivery (under 24 hours) are available at higher rates. Turnaround times depend on assignment complexity and length.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is my information kept confidential?</div>
+        <div class="faq-a">Absolutely. We never share your personal information, order details, or any files you submit with third parties. All communications and files are handled with strict confidentiality.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What file types can I upload?</div>
+        <div class="faq-a">Our order form accepts PDF, DOCX, PPTX, XLSX, JPG, PNG, and most common file formats. You can also paste text instructions directly into the form if you don't have a file.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TERMS -->
+<section class="terms-section" id="terms">
+  <div class="container">
+    <h2 class="section-title">Terms of Service</h2>
+    <p class="section-sub">By placing an order, you agree to the following terms.</p>
+    <div class="terms-content">
+      <h3>1. Nature of Service</h3>
+      <p>Virtual Ontario Student Services ("VOSS," "we," "us") provides academic support, tutoring, and reference materials. All work delivered is intended for use as study aids, reference materials, and learning support. The customer ("you") is solely responsible for how materials are used.</p>
+
+      <h3>2. Academic Integrity</h3>
+      <p>Materials provided by VOSS are for educational reference and personal learning purposes. You are responsible for understanding and complying with your educational institution's academic integrity policies. VOSS does not encourage, endorse, or condone academic dishonesty.</p>
+
+      <h3>3. No Grade Guarantee</h3>
+      <p>VOSS makes no guarantees regarding specific grades, marks, or academic outcomes. Grading is at the sole discretion of your instructor and institution. We are not liable for any grade received on work derived from our reference materials.</p>
+
+      <h3>4. Customer Responsibilities</h3>
+      <p>You are responsible for: (a) providing accurate, complete assignment instructions and rubric details; (b) reviewing all delivered materials before use; (c) meeting all personal deadlines for submission to your institution; (d) ensuring file uploads are not corrupted or incomplete. VOSS is not responsible for outcomes resulting from incorrect, incomplete, or late-submitted instructions.</p>
+
+      <h3>5. Delivery &amp; Deadlines</h3>
+      <p>We deliver completed materials to the email address you provide. Delivery timeframes are estimates, not guarantees. While we make every effort to meet agreed deadlines, VOSS is not liable for delays caused by technical issues, force majeure, or circumstances beyond our control. It is your responsibility to submit any work to your institution on time.</p>
+
+      <h3>6. Revision Policy</h3>
+      <p>One (1) free revision is included per order, provided the revision request is submitted within 24 hours of delivery and relates to the original instructions. Revisions for changes to the original scope, additional requirements not in the original order, or requests outside the 24-hour window may incur additional charges.</p>
+
+      <h3>7. Refund Policy</h3>
+      <p>Partial refunds may be considered on a case-by-case basis where the delivered work does not match the instructions provided by the customer. Refunds are NOT available for: (a) grade outcomes; (b) work based on incorrect or incomplete instructions provided by the customer; (c) late submission to your institution; (d) change of mind after delivery; (e) orders where the customer failed to request a revision within the 24-hour window. Refund requests must be submitted within 48 hours of delivery.</p>
+
+      <h3>8. Payment Terms</h3>
+      <p>Full payment is required before work begins unless otherwise agreed. Payment is accepted via Interac e-Transfer. All prices are in Canadian dollars (CAD). Prices quoted are final; we do not charge hidden fees.</p>
+
+      <h3>9. Privacy &amp; Confidentiality</h3>
+      <p>We take your privacy seriously. Your personal information, order details, and submitted files are kept strictly confidential and are never shared with third parties. We retain order records for business purposes only and handle all data in accordance with applicable Canadian privacy laws.</p>
+
+      <h3>10. Limitation of Liability</h3>
+      <p>To the maximum extent permitted by law, VOSS's total liability for any claim arising from our services shall not exceed the amount paid for the specific order in question. VOSS is not liable for any indirect, incidental, or consequential damages including but not limited to academic penalties, lost opportunities, or emotional distress.</p>
+
+      <h3>11. Technical Issues</h3>
+      <p>VOSS is not responsible for: (a) email delivery failures or spam filtering; (b) file corruption during transmission; (c) incompatible software or devices on the customer's end; (d) internet connectivity issues affecting submission. Customers are encouraged to check spam/junk folders and confirm receipt of delivered materials.</p>
+
+      <h3>12. Cancellation</h3>
+      <p>Orders may be cancelled with a full refund before work has begun. Once work has commenced, cancellations may be subject to a partial charge based on work already completed. No refunds for completed and delivered orders except as outlined in the Refund Policy above.</p>
+
+      <h3>13. Changes to Terms</h3>
+      <p>VOSS reserves the right to update these terms at any time. The terms in effect at the time of your order apply to that order. Continued use of our services constitutes acceptance of the current terms.</p>
+
+      <p style="margin-top: 2rem; font-style: italic;">Last updated: March 2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Virtual Ontario Student Services</strong></p>
+  <p style="margin: 0.5rem 0;">Academic support and reference materials for Ontario students.</p>
+  <p>Email: <a href="mailto:brandonj3699@gmail.com">brandonj3699@gmail.com</a></p>
+  <p style="margin-top: 1rem; font-size: 0.85rem;">&copy; 2026 Virtual Ontario Student Services. All rights reserved.</p>
+  <p style="font-size: 0.8rem; margin-top: 0.5rem;"><a href="#terms">Terms of Service</a> &bull; <a href="#faq">FAQ</a></p>
+</footer>
+
+<script>
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.querySelector('.nav-links')?.classList.remove('open');
+    });
+  });
+</script>
+
+</body>
+</html>
